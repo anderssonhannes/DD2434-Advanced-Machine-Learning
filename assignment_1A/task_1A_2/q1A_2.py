@@ -142,9 +142,9 @@ def main():
 
     print("\n1. Load tree data from file and print it\n")
 
-    filename = "data/q1A_2/q1A_2_small_tree.pkl"  # "data/q1A_2_medium_tree.pkl", "data/q1A_2_large_tree.pkl"
-    #filename = "data/q1A_2/q2_2_medium_tree.pkl"
-    #filename = "data/q1A_2/q2_2_large_tree.pkl"
+    filename = "task_1A_2/data/q1A_2/q1A_2_small_tree.pkl"  # "data/q1A_2_medium_tree.pkl", "data/q1A_2_large_tree.pkl"
+    #filename = "task_1A_2/data/q1A_2/q2_2_medium_tree.pkl"
+    #filename = "task_1A_2/data/q1A_2/q2_2_large_tree.pkl"
     print("filename: ", filename)
 
     t = Tree()
