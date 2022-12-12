@@ -110,7 +110,6 @@ def calculate_likelihood(tree_topology, theta, beta):
                 
                 iter = 1
             
-
         J = len(leaf_vec_idx) -1
         
     # Start: Example Code Segment. Delete this segment completely before you implement the algorithm.
@@ -142,8 +141,8 @@ def main():
 
     print("\n1. Load tree data from file and print it\n")
 
-    filename = "task_1A_2/data/q1A_2/q1A_2_small_tree.pkl"  # "data/q1A_2_medium_tree.pkl", "data/q1A_2_large_tree.pkl"
-    #filename = "task_1A_2/data/q1A_2/q2_2_medium_tree.pkl"
+    #filename = "task_1A_2/data/q1A_2/q1A_2_small_tree.pkl"  # "data/q1A_2_medium_tree.pkl", "data/q1A_2_large_tree.pkl"
+    filename = "task_1A_2/data/q1A_2/q2_2_medium_tree.pkl"
     #filename = "task_1A_2/data/q1A_2/q2_2_large_tree.pkl"
     print("filename: ", filename)
 
