@@ -50,48 +50,39 @@ def calculate_likelihood(tree_topology, theta, beta):
     N = len(beta)   # Number of nodes
     K = 5           # Number of classes in each vertex
 
-
-
     s_arr = np.zeros((N,K))
     leaf_vec_idx = [i for i,x in enumerate(beta) if np.isnan(x) == False]   # Takes out the index of every leaf node
 
     # Initiating the s values for the leaf nodes for which they are 1
     for i in leaf_vec_idx:
         s_arr[i][int(beta[i])] = 1
-
-
-    # for i in leaf_vec_idx:
-    #     s_arr[i] = np.ones(K)
-
     
     # Want to see if a leaf have the same parents, in that case we can calculate the s(parent,*)
     J = len(leaf_vec_idx)-1      # last index of vector
     iter = 1
     start_idx = leaf_vec_idx[J]
-    next_start_idx = leaf_vec_idx[J-1]
     current_parent = int(tree_topology[start_idx])
 
     while(J != -1):                 # Stops when vector is empty
         
-        
+        # Index of the childs in the tree_topolyf[leaf_vec_idx] list
         child_idx = np.where(tree_topology[leaf_vec_idx] == current_parent)[0] # Select index 0 which is array of index for children, otherwise returns tuple
 
         if len(child_idx) < 2:
             iter += 1
             current_parent = tree_topology[leaf_vec_idx].astype(int)[-iter]  
         
-        elif len(child_idx) == 0: 
-            print("You are now at the root") 
-            leaf_vec_idx = []
+        # If something in the code goes wrong
         elif len(child_idx) > 2: raise ValueError('The number of children for a vertex cannot be more than 2')
         
         else: 
+            # Transfer the child_idx to the actual node indexes of the leafs
             first_child = leaf_vec_idx[child_idx[1]]
             second_child = leaf_vec_idx[child_idx[0]]
             s_temp = [ np.dot(theta[first_child][l],s_arr[first_child]) * np.dot(theta[second_child][l],s_arr[second_child])  for l in range(K)]
             s_arr[current_parent] = s_temp
             
-            # Remove the two leafs that was just added, start with largest index to not make the list to short
+            # Remove the two leafs that was just added, start with largest index to not make the list to short for the other index
             if child_idx[1] > child_idx[0]: 
                 leaf_vec_idx.pop(child_idx[1])
                 leaf_vec_idx.pop(child_idx[0])
@@ -119,21 +110,6 @@ def calculate_likelihood(tree_topology, theta, beta):
 
     return likelihood
 
-def calculate_likelihod_recursive(tree_topology, theta, beta):
-    N = len(beta)   # Number of nodes
-    K = 5           # Number of classes in each vertex
-
-
-
-
-
-    # Start: Example Code Segment. Delete this segment completely before you implement the algorithm.
-    print("\tCalculating the likelihood...")
-    likelihood = np.random.rand()
-    # End: Example Code Segment
-
-    return likelihood
-
 
 def main():
     print("Hello World!")
@@ -141,9 +117,9 @@ def main():
 
     print("\n1. Load tree data from file and print it\n")
 
-    #filename = "task_1A_2/data/q1A_2/q1A_2_small_tree.pkl"  # "data/q1A_2_medium_tree.pkl", "data/q1A_2_large_tree.pkl"
-    filename = "task_1A_2/data/q1A_2/q2_2_medium_tree.pkl"
-    #filename = "task_1A_2/data/q1A_2/q2_2_large_tree.pkl"
+    #filename = "assignment_1A/task_1A_2/data/q1A_2/q1A_2_small_tree.pkl" 
+    #filename = "assignment_1A/task_1A_2/data/q1A_2/q2_2_medium_tree.pkl"
+    filename = "assignment_1A/task_1A_2/data/q1A_2/q2_2_large_tree.pkl"
     print("filename: ", filename)
 
     t = Tree()
